@@ -19,7 +19,12 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBox Margin="0,0,0,16" x:Name="SearchTextBox" PlaceholderText="ស្វែងរកពាក្យ" FontFamily="{StaticResource AppFontFamily}"/>
+        <TextBox 
+            Margin="0,0,0,16" 
+            x:Name="SearchTextBox" 
+            PlaceholderText="ស្វែងរកពាក្យ" 
+            FontSize="16"
+            FontFamily="{StaticResource AppFontFamily}"/>
         <Grid Grid.Row="1">
             <GridView 
                 ScrollViewer.CanContentRenderOutsideBounds="False"
@@ -29,7 +34,10 @@
                 <GridView.ItemTemplate>
                     <DataTemplate x:DataType="dict:Dict">
                         <Grid Margin="16,8" Width="220">
-                            <TextBlock Text="{Binding Word, Mode=OneWay}" FontFamily="{StaticResource AppFontFamily}"/>
+                            <TextBlock 
+                                Text="{Binding Word, Mode=OneWay}" 
+                                FontSize="16"
+                                FontFamily="{StaticResource AppFontFamily}"/>
                         </Grid>
                     </DataTemplate>
                 </GridView.ItemTemplate>

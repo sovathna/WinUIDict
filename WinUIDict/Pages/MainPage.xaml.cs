@@ -27,8 +27,7 @@ namespace WinUIDict.Pages
     {
         public MainPage()
         {
-            this.InitializeComponent();
-           
+            InitializeComponent();
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)

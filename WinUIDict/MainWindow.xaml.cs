@@ -25,6 +25,9 @@ namespace WinUIDict
     /// </summary>
     public sealed partial class MainWindow : Window
     {
+
+        public IItemSelect ItemSelect;
+
         public MainWindow()
         {
             InitializeComponent();

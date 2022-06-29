@@ -13,7 +13,6 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Assets\Databases\dict.sqlite" />
-    <None Remove="Assets\Databases\dict_new.sqlite" />
     <None Remove="Pages\DefinitionPage.xaml" />
     <None Remove="Pages\MainPage.xaml" />
     <None Remove="Pages\SplashPage.xaml" />

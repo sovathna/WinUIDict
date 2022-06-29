@@ -24,7 +24,7 @@ namespace WinUIDict
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var installedPath = Package.Current.InstalledLocation.Path;
-            var dbPath = $@"{installedPath}\Assets\Databases\dict_new.sqlite";
+            var dbPath = $@"{installedPath}\Assets\Databases\dict.sqlite";
             optionsBuilder
                 .LogTo(log=>_logger.LogInformation(log))
                 .UseSqlite($"Data Source={dbPath}")

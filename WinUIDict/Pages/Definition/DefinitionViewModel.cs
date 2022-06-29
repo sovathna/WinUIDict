@@ -9,11 +9,9 @@ using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace WinUIDict.Pages.Definition
 {
-    [INotifyPropertyChanged]
-    public sealed partial class DefinitionViewModel
+    public sealed class DefinitionViewModel
     {
-        [ObservableProperty]
-        private SelectedDict _selected;
+        public SelectedDict Selected { get; private set; }
 
         private readonly DictDbContext _context;
         private readonly ILogger _logger;

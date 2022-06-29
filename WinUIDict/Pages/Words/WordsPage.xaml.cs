@@ -40,7 +40,8 @@ public sealed partial class WordsPage : Page
     private  void GridView_ItemClick(object sender, ItemClickEventArgs e)
     {
         var item = (Dict)e.ClickedItem;
-        _logger.LogInformation("{Word}", item.Word);
-         ViewModel.SelectWord(item);
+        //_logger.LogInformation("{Word}", item.Definition);
+        //ViewModel.SelectWord(item);
+        App.Current.MainWindow.ItemSelect.OnItemSelect(item);
     }
 }
