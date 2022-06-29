@@ -13,25 +13,26 @@ namespace WinUIDict
 {
     public sealed class DictDbContext : DbContext
     {
+        private readonly ILogger _logger;
 
-        private readonly ILoggerFactory _loggerFactory;
-
-        public DictDbContext(ILoggerFactory loggerFactory)
+        public DictDbContext(ILogger<DictDbContext> logger)
         {
-            _loggerFactory = loggerFactory;
+            _logger = logger;
+            Database.EnsureCreated();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            var installedPath = Package.Current.InstalledPath;
-            var dbPath = $@"{installedPath}\Assets\Databases\dict.sqlite";
+            var installedPath = Package.Current.InstalledLocation.Path;
+            var dbPath = $@"{installedPath}\Assets\Databases\dict_new.sqlite";
             optionsBuilder
-                .UseLoggerFactory(_loggerFactory)
+                .LogTo(log=>_logger.LogInformation(log))
                 .UseSqlite($"Data Source={dbPath}")
                 .EnableSensitiveDataLogging()
                 .EnableDetailedErrors();
         }
 
         public DbSet<Dict> Dicts { get; set; }
+        public DbSet<SelectedDict> SelectedDicts { get; set; }
     }
 }

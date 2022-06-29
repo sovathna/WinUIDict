@@ -25,9 +25,7 @@ namespace WinUIDict.Pages.Words
         {
             _logger.LogInformation("GetPagedItemsAsync {Page} {Size}", pageIndex, pageSize);
 
-            if(pageIndex==1)
-            await Task.Delay(500, cancellationToken);
-
+            if(pageIndex==1)await Task.Delay(500, cancellationToken);
 
             return _context.Dicts.AsNoTracking()
                .Skip(pageIndex * pageSize)

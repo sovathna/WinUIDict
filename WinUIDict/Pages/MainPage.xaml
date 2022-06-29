@@ -11,10 +11,10 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="220"/>
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Frame x:Name="WordsFrame" IsNavigationStackEnabled="False"/>
+        <Frame x:Name="WordsFrame" IsNavigationStackEnabled="False" Width="220"/>
         <Frame Grid.Column="1" x:Name="DefinitionFrame" IsNavigationStackEnabled="False"/>
     </Grid>
 </Page>

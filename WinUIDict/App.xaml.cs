@@ -21,6 +21,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using WinUIDict.Pages.Definition;
 using WinUIDict.Pages.Words;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -49,14 +50,15 @@ namespace WinUIDict
                 .AddDbContext<DictDbContext>()
                 .AddTransient<WordsSource>()
                 .AddTransient<WordsViewModel>()
+                
+                .AddTransient<DefinitionViewModel>()
 
             )
-                .UseSerilog((context, services, loggerConfig) =>
-                
-                loggerConfig
-                    .Enrich.FromLogContext()
-                    .WriteTo.Debug(new RenderedCompactJsonFormatter())
-                )
+                //.UseSerilog((context, services, loggerConfig) =>
+                //loggerConfig
+                //    .Enrich.FromLogContext()
+                //    .WriteTo.Debug(new RenderedCompactJsonFormatter())
+                //)
                 .Build();
             AppHost.RunAsync();
             Services = AppHost.Services;
