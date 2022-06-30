@@ -26,41 +26,5 @@ namespace WinUIDict.Pages.Words
             if(Words.IsLoading) return Visibility.Visible;
             return Visibility.Collapsed;
         }
-
-        public void SelectWord(Dict dict)
-        {
-            var old = _context.SelectedDicts.OrderBy(d => d.Id).FirstOrDefault();
-
-            if (old?.WordId == dict.Id) return;
-            var definition = dict.Definition
-                .Replace("<\"", "<a href=\"")
-                .Replace("/a", "</a>")
-            .Replace("\\n", "<br><br>")
-            .Replace(" : ", " : ឧ. ")
-            .Replace("ន.", "<span style=\"color:#D32F2F\">ន.</span>")
-            .Replace("កិ. វិ.", "<span style=\"color:#D32F2F\">កិ. វិ.</span>")
-            .Replace("កិ.វិ.", "<span style=\"color:#D32F2F\">កិ.វិ.</span>")
-            .Replace("កិ.", "<span style=\"color:#D32F2F\">កិ.</span>")
-            .Replace("និ.", "<span style=\"color:#D32F2F\">និ.</span>")
-            .Replace("គុ.", "<span style=\"color:#D32F2F\">គុ.</span>");
-          
-            if (old == null)
-            {
-                _context.SelectedDicts.Add(new SelectedDict
-                {
-                    WordId = dict.Id,
-                    Word = dict.Word,
-                    Definition = definition
-                });
-            }
-            else
-            {
-                old.Word = dict.Word;
-                old.WordId = dict.Id;
-                old.Definition = definition;
-            }
-            _context.SaveChanges();
-
-        }
     }
 }

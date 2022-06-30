@@ -18,7 +18,6 @@ namespace WinUIDict
         public DictDbContext(ILogger<DictDbContext> logger)
         {
             _logger = logger;
-            Database.EnsureCreated();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -33,6 +32,5 @@ namespace WinUIDict
         }
 
         public DbSet<Dict> Dicts { get; set; }
-        public DbSet<SelectedDict> SelectedDicts { get; set; }
     }
 }

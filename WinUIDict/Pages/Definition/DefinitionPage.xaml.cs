@@ -30,29 +30,70 @@ public sealed partial class DefinitionPage : Page, IItemSelect
     public DefinitionPage()
     {
         this.InitializeComponent();
-        DataContext = _viewModel.Selected;
         App.Current.MainWindow.ItemSelect = this;
     }
 
     public void OnItemSelect(Dict dict)
     {
-        Debug.WriteLine("{Def}", dict.Definition);
-        var paragraph = new Paragraph();
-        var run =new Run();
-        var definition = dict.Definition
-                .Replace("<\"", "<a href=\"")
-                .Replace("/a", "</a>")
-            .Replace("\\n", "<br><br>")
-            .Replace(" : ", " : ឧ. ")
-            .Replace("ន.", "<span style=\"color:#D32F2F\">ន.</span>")
-            .Replace("កិ. វិ.", "<span style=\"color:#D32F2F\">កិ. វិ.</span>")
-            .Replace("កិ.វិ.", "<span style=\"color:#D32F2F\">កិ.វិ.</span>")
-            .Replace("កិ.", "<span style=\"color:#D32F2F\">កិ.</span>")
-            .Replace("និ.", "<span style=\"color:#D32F2F\">និ.</span>")
-            .Replace("គុ.", "<span style=\"color:#D32F2F\">គុ.</span>");
+        DetailTextBlock.Blocks.Clear();
+        //Debug.WriteLine("{Def}", dict.Definition);
+        var definition = dict.Definition;
 
-        run.Text = definition;
-        paragraph.Inlines.Add(run);
-        DetailTextBlock.Blocks.Add(paragraph);
+        WordTextBlock.Text = dict.Word;
+        foreach (var s in definition.Split("\\n"))
+        {
+            var paragraph = new Paragraph();
+            
+            paragraph.Margin = new Thickness
+            {
+                Bottom = 32
+            };
+            foreach(var s1 in s.Split("<\""))
+            {
+                if (!string.IsNullOrWhiteSpace(s1))
+                {
+                    foreach (var s2 in s1.Split("/a"))
+                    {
+                        if (s2.Contains("\">"))
+                        {
+                            var tmps = s2.Split("\">");
+                            var run = new Run();
+                            var span = new Span();
+    
+          
+                            run.Text = tmps[1];
+                            var hyperLink = new Hyperlink()
+                            {
+                                UnderlineStyle = UnderlineStyle.None,
+                            };
+                            hyperLink.SetValue(NameProperty, tmps[0]);
+                            hyperLink.Click += HyperLink_Click;
+                            hyperLink.GotFocus += HyperLink_GotFocus;
+                          
+                            hyperLink.Inlines.Add(run);
+                            paragraph.Inlines.Add(hyperLink);
+                        }
+                        else
+                        {
+                            var run = new Run();
+                            run.Text = s2;
+                            paragraph.Inlines.Add(run);
+                        }
+                    }
+                }
+            }
+            DetailTextBlock.Blocks.Add(paragraph);
+        }
+    }
+
+    private void HyperLink_GotFocus(object sender, RoutedEventArgs e)
+    {
+        Debug.WriteLine("focus");
+    }
+
+    private void HyperLink_Click(Hyperlink sender, HyperlinkClickEventArgs args)
+    {
+
+       Debug.WriteLine(sender.Name);
     }
 }

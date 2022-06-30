@@ -8,9 +8,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    <Page.DataContext>
-        <proj:SelectedDict/>
-    </Page.DataContext>
     <Page.Resources>
         <FontFamily x:Key="AppFontFamily">Hanuman</FontFamily>
     </Page.Resources>
@@ -20,7 +17,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <TextBlock 
-            Text="{Binding Word, Mode=OneWay}" 
+            x:Name="WordTextBlock"
             FontSize="24" 
             Margin="0,0,0,16"
             FontFamily="{StaticResource AppFontFamily}"/>
@@ -33,6 +30,7 @@
                 TextWrapping="WrapWholeWords"
                 FontSize="16"
                 FontFamily="{StaticResource AppFontFamily}">
+  
             </RichTextBlock>
         </ScrollViewer>
     </Grid>

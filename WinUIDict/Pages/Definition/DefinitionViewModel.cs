@@ -11,8 +11,6 @@ namespace WinUIDict.Pages.Definition
 {
     public sealed class DefinitionViewModel
     {
-        public SelectedDict Selected { get; private set; }
-
         private readonly DictDbContext _context;
         private readonly ILogger _logger;
 
@@ -20,16 +18,7 @@ namespace WinUIDict.Pages.Definition
         {
             _context = dbContext;
             _logger = logger;
-            GetSelected();
-        }
 
-        private void GetSelected()
-        { 
-                var first =  _context.SelectedDicts.OrderBy(d => d.Id).FirstOrDefault();
-                if (first != null)
-                {
-                    Selected = first;
-                }
         }
     }
 }
