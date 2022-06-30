@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.WinUI;
-using Microsoft.UI.Xaml;
 
 namespace WinUIDict.Pages.Words
 {
@@ -12,12 +11,6 @@ namespace WinUIDict.Pages.Words
         {
             Words = new(wordsSource, 100);
             _context = context;
-        }
-
-        public Visibility ProgressVisibility()
-        {
-            if (Words.IsLoading) return Visibility.Visible;
-            return Visibility.Collapsed;
         }
     }
 }

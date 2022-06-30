@@ -13,6 +13,7 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Assets\Databases\dict.sqlite" />
+    <None Remove="Assets\Databases\khdict.sqlite" />
     <None Remove="Pages\DefinitionPage.xaml" />
     <None Remove="Pages\MainPage.xaml" />
     <None Remove="Pages\SplashPage.xaml" />
@@ -41,6 +42,7 @@
     <PackageReference Include="Serilog.Extensions.Hosting" Version="5.0.0-dev-00095" />
     <PackageReference Include="Serilog.Formatting.Compact" Version="1.1.1-dev-00944" />
     <PackageReference Include="Serilog.Sinks.Debug" Version="2.0.0" />
+    <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
     <Manifest Include="$(ApplicationManifest)" />
   </ItemGroup>
 

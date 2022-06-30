@@ -1,8 +1,11 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Documents;
+using Microsoft.UI.Xaml.Media;
 using System.Diagnostics;
+using System.Drawing;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -28,7 +31,7 @@ public sealed partial class DefinitionPage : Page, IItemSelect
         var definition = dict.Definition;
 
         WordTextBlock.Text = dict.Word;
-        foreach (var s in definition.Split("\\n"))
+        foreach (var s in definition.Split("[NewLine]"))
         {
             var paragraph = new Paragraph();
 
@@ -36,19 +39,12 @@ public sealed partial class DefinitionPage : Page, IItemSelect
             {
                 Bottom = 32
             };
-            foreach (var s1 in s.Split("<\""))
+            foreach (var s1 in s.Split("[]"))
             {
-                if (!string.IsNullOrWhiteSpace(s1))
-                {
-                    foreach (var s2 in s1.Split("/a"))
-                    {
-                        if (s2.Contains("\">"))
+                        if (s1.Contains('|'))
                         {
-                            var tmps = s2.Split("\">");
+                            var tmps = s1.Split("|");
                             var run = new Run();
-                            var span = new Span();
-
-
                             run.Text = tmps[1];
                             var hyperLink = new Hyperlink()
                             {
@@ -56,7 +52,7 @@ public sealed partial class DefinitionPage : Page, IItemSelect
                             };
                             hyperLink.SetValue(NameProperty, tmps[0]);
                             hyperLink.Click += HyperLink_Click;
-                            hyperLink.GotFocus += HyperLink_GotFocus;
+                            hyperLink.Foreground = new SolidColorBrush(Colors.Black);
 
                             hyperLink.Inlines.Add(run);
                             paragraph.Inlines.Add(hyperLink);
@@ -64,11 +60,23 @@ public sealed partial class DefinitionPage : Page, IItemSelect
                         else
                         {
                             var run = new Run();
-                            run.Text = s2;
+                    if (s1.Contains("[HI]"))
+                    {
+                        run.Text = s1.Replace("[HI]","");
+                        run.Foreground = new SolidColorBrush(Colors.GreenYellow);
+                    }
+                    else if (s1.Contains("[HI1]"))
+                    {
+                        run.Text = s1.Replace("[HI1]","");
+                        run.Foreground = new SolidColorBrush(Colors.Red);
+                    }
+                    else {
+                        run.Text = s1;
+                        run.Foreground = new SolidColorBrush(Colors.Black);
+                    }
+                   
                             paragraph.Inlines.Add(run);
                         }
-                    }
-                }
             }
             DetailTextBlock.Blocks.Add(paragraph);
         }
