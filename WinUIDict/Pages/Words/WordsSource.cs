@@ -1,10 +1,8 @@
 ﻿using CommunityToolkit.Common.Collections;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -25,7 +23,7 @@ namespace WinUIDict.Pages.Words
         {
             _logger.LogInformation("GetPagedItemsAsync {Page} {Size}", pageIndex, pageSize);
 
-            if(pageIndex==1)await Task.Delay(500, cancellationToken);
+            if (pageIndex == 1) await Task.Delay(500, cancellationToken);
 
             return _context.Dicts.AsNoTracking()
                .Skip(pageIndex * pageSize)

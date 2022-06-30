@@ -1,26 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.UI.Xaml;
-using Microsoft.UI.Xaml.Controls;
-using Microsoft.UI.Xaml.Controls.Primitives;
-using Microsoft.UI.Xaml.Data;
-using Microsoft.UI.Xaml.Input;
-using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
-using Microsoft.UI.Xaml.Shapes;
-using Serilog;
-using Serilog.Formatting.Compact;
-using Serilog.Formatting.Json;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.ApplicationModel;
-using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using WinUIDict.Pages.Definition;
 using WinUIDict.Pages.Words;
 
@@ -50,7 +31,7 @@ namespace WinUIDict
                 .AddDbContext<DictDbContext>()
                 .AddTransient<WordsSource>()
                 .AddTransient<WordsViewModel>()
-                
+
                 .AddTransient<DefinitionViewModel>()
 
             )

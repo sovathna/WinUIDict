@@ -1,18 +1,11 @@
 ﻿using CommunityToolkit.WinUI;
 using Microsoft.UI.Xaml;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Windows.Data.Html;
 
 namespace WinUIDict.Pages.Words
 {
     public sealed class WordsViewModel
     {
-        public readonly IncrementalLoadingCollection<WordsSource,Dict> Words;
+        public readonly IncrementalLoadingCollection<WordsSource, Dict> Words;
         private readonly DictDbContext _context;
 
         public WordsViewModel(WordsSource wordsSource, DictDbContext context)
@@ -23,7 +16,7 @@ namespace WinUIDict.Pages.Words
 
         public Visibility ProgressVisibility()
         {
-            if(Words.IsLoading) return Visibility.Visible;
+            if (Words.IsLoading) return Visibility.Visible;
             return Visibility.Collapsed;
         }
     }
